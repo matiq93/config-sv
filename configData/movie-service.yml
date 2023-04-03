@@ -6,6 +6,8 @@ logging:
     root: WARN
 
 spring:
+  zipkin:
+    base-url: http://localhost:9411/
   security:
     oauth2:
       resourceserver:
