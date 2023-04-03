@@ -1,0 +1,39 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+  endpoint:
+    health:
+      show-details: always
+
+  health:
+    circuitbreakers:
+      enabled: true
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://registry-service:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+# RabbitMQ para los servicios que lo requieran
+spring:
+  rabbitmq:
+    host: rabbitmq
+    username: guest
+    password: guest
+
+  zipkin:
+    base-url: http://localhost:9411/
+
+# Configura los nomrbes de las colas que vamos a tener
+queue:
+  movie:
+    name: MovieQueue
+  serie:
+    name: SerieQueue
