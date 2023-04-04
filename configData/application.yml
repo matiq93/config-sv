@@ -24,7 +24,7 @@ eureka:
 # RabbitMQ para los servicios que lo requieran
 spring:
   rabbitmq:
-    host: localhost
+    host: rabbitmq
     username: guest
     password: guest
 
