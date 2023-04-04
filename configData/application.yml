@@ -24,4 +24,4 @@ queue:
   movie:
     name: MovieQueue
   serie:
-    name: SerieQueu
+    name: SerieQueue
