@@ -1,43 +1,70 @@
-server:
-  port: 8081
-
 spring:
+  eureka:
+    client:
+      service-url:
+        defaultZone: http://localhost:8761/eureka
   data:
     mongodb:
-      # uri: mongodb://catalog-db:27018/netflix
-      host: catalog-db
-      username: catalog
-      password: password
-      port: 27018
-      database: catalog_database
+      authentication-database: admin
+      username: rootuser
+      password: rootpass
+      database: microfinal
+      port: 27017
+      host: localhost
+      
+info:
+  app:
+    description: Catalog Service for Movies Application
+    name: ${spring.application.name}
+    version: 1.2.0
 
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: https://accounts.google.com
-
+management:
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: circuitbreakers,circuitbreakerevents,health,info,metrics,ratelimiters
 
 resilience4j:
   circuitbreaker:
     instances:
-      series:
-        sliding-window-type: COUNT_BASED
-        sliding-window-size: 5
-        failure-rate-threshold: 50
-        wait-duration-in-open-state: 15s
-        permitted-number-of-calls-in-half-open-state: 3
-        register-health-indicator: true
-        allow-health-indicator-to-fail: false
-        automatic-transition-from-open-to-half-open-enabled: true
+      moviesByGenre:
+        allowHealthIndicatorToFail: false
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        failureRateThreshold: 50 
+        permittedNumberOfCallsInHalfOpenState: 3
+        registerHealthIndicator: true
+        slidingWindowSize: 5
+        slidingWindowType: COUNT_BASED
+        waitDurationInOpenState: 15000
+      seriesByGenre:
+        allowHealthIndicatorToFail: false
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        failureRateThreshold: 50
+        permittedNumberOfCallsInHalfOpenState: 3
+        registerHealthIndicator: true
+        slidingWindowSize: 5
+        slidingWindowType: COUNT_BASED
+        waitDurationInOpenState: 15000
   retry:
     instances:
-      series:
-        wait-duration: 1000
-        retry-exceptions:
+      moviesByGenre:
+        maxAttempts: 3 
+        retryExceptions: 
           - feign.FeignException$InternalServerError
-        max-attempts: 3
+          - feign.FeignException$ServiceUnavailable
+        waitDuration: 1000 
+      seriesByGenre:
+        maxAttempts: 3
+        retryExceptions:
+          - feign.FeignException$InternalServerError
+          - feign.FeignException$ServiceUnavailable
+        waitDuration: 1000
 
-logging:
-  level:
-    org.springframework.security: DEBUG
+server:
+  port: 8090

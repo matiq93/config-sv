@@ -1,37 +1,18 @@
+global-message: Configuration server is alive!
+
 management:
+  endpoint:
+    info:
+      enabled: true
   endpoints:
     web:
       exposure:
-        include: '*'
-
-  endpoint:
-    health:
-      show-details: always
-
-  health:
-    circuitbreakers:
+        include: health,info,loggers,mappings
+  info:
+    env:
       enabled: true
-
-eureka:
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-
-# RabbitMQ para los servicios que lo requieran
+      
 spring:
-  rabbitmq:
-    host: localhost
-    username: guest
-    password: guest
-
   zipkin:
-    base-url: http://localhost:9411/
-
-# Configura los nomrbes de las colas que vamos a tener
-queue:
-  movie:
-    name: MovieQueue
-  serie:
-    name: SerieQueue
+    baseUrl: http://localhost:9411
+    enabled: true
