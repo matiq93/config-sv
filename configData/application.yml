@@ -11,6 +11,17 @@ management:
       enabled: true
       
 spring:
+  rabbitmq:
+    host: localhost
+    username: guest
+    password: guest
+
   zipkin:
-    baseUrl: http://localhost:9411
-    enabled: true
+    base-url: http://localhost:9411/
+
+# Configura los nomrbes de las colas que vamos a tener
+queue:
+  movie:
+    name: MovieQueue
+  serie:
+    name: SerieQueu
