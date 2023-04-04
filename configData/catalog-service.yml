@@ -1,70 +1,36 @@
+server:
+  port: 8025
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
 spring:
-  eureka:
-    client:
-      service-url:
-        defaultZone: http://localhost:8761/eureka
-  data:
-    mongodb:
-      authentication-database: admin
-      username: rootuser
-      password: rootpass
-      database: microfinal
-      port: 27017
-      host: localhost
-      
-info:
-  app:
-    description: Catalog Service for Movies Application
-    name: ${spring.application.name}
-    version: 1.2.0
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: sa
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+message: hello from catalog-service
 
 management:
-  endpoint:
-    health:
-      show-details: always
-  health:
-    circuitbreakers:
-      enabled: true
   endpoints:
     web:
       exposure:
-        include: circuitbreakers,circuitbreakerevents,health,info,metrics,ratelimiters
+        include: '*'
 
-resilience4j:
-  circuitbreaker:
-    instances:
-      moviesByGenre:
-        allowHealthIndicatorToFail: false
-        automaticTransitionFromOpenToHalfOpenEnabled: true
-        failureRateThreshold: 50 
-        permittedNumberOfCallsInHalfOpenState: 3
-        registerHealthIndicator: true
-        slidingWindowSize: 5
-        slidingWindowType: COUNT_BASED
-        waitDurationInOpenState: 15000
-      seriesByGenre:
-        allowHealthIndicatorToFail: false
-        automaticTransitionFromOpenToHalfOpenEnabled: true
-        failureRateThreshold: 50
-        permittedNumberOfCallsInHalfOpenState: 3
-        registerHealthIndicator: true
-        slidingWindowSize: 5
-        slidingWindowType: COUNT_BASED
-        waitDurationInOpenState: 15000
-  retry:
-    instances:
-      moviesByGenre:
-        maxAttempts: 3 
-        retryExceptions: 
-          - feign.FeignException$InternalServerError
-          - feign.FeignException$ServiceUnavailable
-        waitDuration: 1000 
-      seriesByGenre:
-        maxAttempts: 3
-        retryExceptions:
-          - feign.FeignException$InternalServerError
-          - feign.FeignException$ServiceUnavailable
-        waitDuration: 1000
-
-server:
-  port: 8090
+movie-service:
+  url: http://localhost:8023/movies/%s
