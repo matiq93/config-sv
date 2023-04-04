@@ -12,11 +12,7 @@ spring:
         jwt:
           issuer-uri: https://accounts.google.com
 
-  sql:
-    init:
-      mode: always
-      data-locations: classpath:/sql/init.sql
-
+ 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/movies_database
