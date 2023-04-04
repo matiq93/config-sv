@@ -23,7 +23,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/movies_database
     username: root
-    password: root
+    password: 378728122
 
   jpa:
     defer-datasource-initialization: true
