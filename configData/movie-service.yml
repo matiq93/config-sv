@@ -6,13 +6,7 @@ logging:
     root: WARN
 
 spring:
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: https://accounts.google.com
 
- 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/movies_database
