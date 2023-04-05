@@ -19,9 +19,3 @@ spring:
       ddl-auto: drop-and-create
    
 message: hello from movie-service
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'

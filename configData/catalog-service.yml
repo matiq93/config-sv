@@ -14,11 +14,6 @@ spring:
 
 message: hello from catalog-service
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
 
 resilience4j:
   circuitbreaker:
@@ -39,3 +34,8 @@ resilience4j:
         retry-exceptions:
           - feign.FeignException$InternalServerError
         max-attempts: 3
+
+management:
+  health:
+    circuitbreakers:
+      enabled: true
