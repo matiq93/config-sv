@@ -22,6 +22,6 @@ spring:
 # Configura los nomrbes de las colas que vamos a tener
 queue:
   movie:
-    name: MovieQueue
+    name: newMovie
   serie:
-    name: SerieQueue
+    name: newSerie
