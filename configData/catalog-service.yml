@@ -1,5 +1,5 @@
 server:
-  port: 8025
+  port: ${RANDOM_PORT:8025}
 eureka:
   client:
     service-url:

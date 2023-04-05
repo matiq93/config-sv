@@ -1,5 +1,5 @@
 server:
-  port: 8024
+  port: ${RANDOM_PORT:8024}
 
 eureka:
   client:
