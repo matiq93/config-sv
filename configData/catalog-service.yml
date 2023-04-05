@@ -23,7 +23,7 @@ management:
 resilience4j:
   circuitbreaker:
     instances:
-      series:
+      catalog:
         sliding-window-type: COUNT_BASED
         sliding-window-size: 5
         failure-rate-threshold: 50
@@ -34,7 +34,7 @@ resilience4j:
         automatic-transition-from-open-to-half-open-enabled: true
   retry:
     instances:
-      series:
+      catalog:
         wait-duration: 5000
         retry-exceptions:
           - feign.FeignException$InternalServerError
