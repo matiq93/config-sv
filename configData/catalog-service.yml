@@ -20,7 +20,3 @@ management:
       exposure:
         include: '*'
 
-movie-service:
-  url: http://localhost:8023/movies/%s
-serie-service:
-  url: http://localhost:8024/series/%s
