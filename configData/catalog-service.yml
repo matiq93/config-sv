@@ -22,3 +22,5 @@ management:
 
 movie-service:
   url: http://localhost:8023/movies/%s
+  movie-service:
+  url: http://localhost:8024/series/%s
